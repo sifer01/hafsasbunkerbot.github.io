@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bunker Access</title>
+  <style>
+    body {
+      font-family: 'Courier New', monospace;
+      background-color: #000000;
+      color: #ed37bc;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    input {
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      font-size: 16px;
+      width: 250px;
+      text-align: center;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #b53aa1;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    button:hover {
+      background-color: #b53aa1;
+      color: #ffffffff;
+    }
+    .error {
+      color: red;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Welcome Ms. Hafsa</h1>
+  <input type="password" id="secretPhrase" placeholder="Enter secret phrase...">
+  <button onclick="checkPhrase()">Access Bunker</button>
+  <div class="error" id="error"></div>
+
+  <script>
+    const SECRET_PHRASE = "open"; // <-- Change this to your chosen phrase
+
+    function checkPhrase() {
+      const input = document.getElementById("secretPhrase").value.trim();
+      if (input === SECRET_PHRASE) {
+        // store flag in session so people can’t skip login
+        sessionStorage.setItem("bunker_access", "true");
+        window.location.href = "button.html";
+      } else {
+        document.getElementById("error").textContent = "Access Denied: Wrong phrase!";
+      }
+    }
+  </script>
+</body>
+</html>

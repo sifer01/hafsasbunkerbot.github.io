@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bunker Button</title>
+  <style>
+    body {
+      font-family: 'Courier New', monospace;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background: linear-gradient(to bottom, #3e3e3e, #2b2b2b); /* dark room */
+    }
+
+    .table {
+      width: 400px;
+      height: 200px;
+      background: #5a3825;
+      border-radius: 10px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.7) inset, 0 10px 30px rgba(0,0,0,0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .button-base {
+      width: 160px;
+      height: 160px;
+      background: #222;
+      border-radius: 50%;
+      position: relative;
+      box-shadow: 0 8px 0 #111, 0 15px 20px rgba(0,0,0,0.7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .button-top {
+      width: 120px;
+      height: 120px;
+      background: radial-gradient(circle at 30% 30%, #ff4d4d, #b30000);
+      border-radius: 50%;
+      position: relative;
+      top: -10px;
+      box-shadow: inset 0 5px 10px rgba(255,255,255,0.3),
+                  inset 0 -5px 10px rgba(0,0,0,0.6),
+                  0 8px 15px rgba(0,0,0,0.8);
+      transition: all 0.15s ease;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      font-weight: bold;
+      color: white;
+      user-select: none;
+    }
+
+    .button-top:active {
+      top: -2px;
+      box-shadow: inset 0 2px 5px rgba(255,255,255,0.2),
+                  inset 0 -2px 5px rgba(0,0,0,0.7),
+                  0 4px 8px rgba(0,0,0,0.8);
+      transform: scale(0.97);
+    }
+  </style>
+</head>
+<body>
+	<div class="navbar">
+ 	 <a href="button.html">Panic Button</a>
+  	<a href="missingboyfriend.html">Missing Boyfriend Portal</a>
+	</div>
+
+	<style>
+ 	 .navbar {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: #1f1b2e;
+      padding: 8px 12px;
+      border-radius: 8px;
+    }
+
+    .navbar a {
+      margin-right: 12px;
+      text-decoration: none;
+      color: #d77bff;
+      font-size: 14px;
+    }
+
+    .navbar a:hover {
+      color: #ffffff;
+      text-decoration: underline;
+    }
+	</style>
+ 	 <div class="table">
+    	<div class="button-base">
+      	<div class="button-top" id="alertBtn">PRESS</div>
+   	</div>
+ 	</div>
+
+  <script>
+  if (sessionStorage.getItem("bunker_access") !== "true") {
+    window.location.href = "index.html";
+  }
+
+  document.getElementById("alertBtn").addEventListener("click", function() {
+    sendToDiscord("🚨 Panic Button", "The red button has been pressed!");
+  });
+
+  function sendToDiscord(title, message) {
+    const webhookURL = "https://discord.com/api/webhooks/1420770076084273294/UX0FSEPcxuS8O41ZGdz0KLJ73Mk2IYHaXIE518d4-cIDPblR_lZ_zut4-0RW5fAgmuot";
+    const payload = {
+      content: "<@356360808168554497>",
+      embeds: [{
+        title: "🚨 CODE RED",
+        description: "CODE RED",
+        color: 0xa020f0, // purple
+        timestamp: new Date()
+      }]
+    };
+
+    fetch(webhookURL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    }).catch(err => console.error("Discord error:", err));
+  }
+
+	function applyAnniversaryTheme() {
+    const today = new Date();
+    if (today.getDate() === 6) {
+      document.body.style.backgroundColor = "#2b0f36"; // deep romantic purple
+      document.body.style.color = "#ff9de2"; // pink text
+      document.body.style.backgroundImage = "url('hearts-bg.png')"; // optional heart pattern
+      document.body.style.backgroundSize = "cover";
+      document.body.style.backgroundRepeat = "no-repeat";
+    }
+  }
+  applyAnniversaryTheme();
+</script>
+
+</body>
+</html>

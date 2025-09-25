@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Missing Boyfriend Portal</title>
+  <style>
+    body {
+      font-family: 'Courier New', monospace;
+      background: url("us-photo.jpg") no-repeat center center fixed;
+      background-size: cover;
+      color: #d77bff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      margin: 0;
+      padding: 0 20px;
+      position: relative;
+    }
+
+    body::before {
+ 	 content: "";
+ 	 position: absolute;
+  	top: 0;
+  	left: 0;
+  	width: 100%;
+  	height: 100%;
+  	background: rgba(11, 12, 16, 0.4); /* dark wash */
+  	backdrop-filter: blur(2px); /* soft blur effect */
+  	z-index: 0;
+    }
+
+	h1, p, .form-section, .navbar, ul {
+  	position: relative;
+  	z-index: 1; /* keeps content above wash */
+	}
+
+
+    h1 {
+      margin: 80px 0 20px 0;
+    }
+
+    p {
+      margin: 10px 0 20px 0;
+      font-size: 14px;
+      color: #c5c6c7;
+      max-width: 500px;
+      text-align: center;
+      line-height: 1.4em;
+    }
+
+    textarea {
+      width: 400px;
+      height: 150px;
+      padding: 10px;
+      font-size: 14px;
+      border-radius: 5px;
+      border: none;
+      resize: none;
+      margin-bottom: 15px;
+      background: #1f1b2e;
+      color: #fff;
+    }
+
+    select {
+      padding: 8px;
+      font-size: 16px;
+      margin-bottom: 15px;
+      border-radius: 5px;
+      border: none;
+      background: #1f1b2e;
+      color: #fff;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #a020f0;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.2s;
+      margin-bottom: 30px;
+    }
+
+    button:hover {
+      background-color: #d77bff;
+      color: #0b0c10;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      max-width: 450px;
+      width: 100%;
+    }
+
+    li {
+      background: #1f1b2e;
+      margin: 10px 0;
+      padding: 12px;
+      border-radius: 5px;
+      word-wrap: break-word;
+    }
+
+    .navbar {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: #1f1b2e;
+      padding: 8px 12px;
+      border-radius: 8px;
+    }
+
+    .navbar a {
+      margin-right: 12px;
+      text-decoration: none;
+      color: #d77bff;
+      font-size: 14px;
+    }
+
+    .navbar a:hover {
+      color: #ffffff;
+      text-decoration: underline;
+    }
+
+    .form-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 20px;
+      margin-bottom: 40px;
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <a href="button.html">Panic Button</a>
+    <a href="missingboyfriend.html">Missing Boyfriend Portal</a>
+  </div>
+  
+  <audio id="crazyAudio" src="crazy.mp3" preload="auto"></audio>
+
+  <h1>Missing Boyfriend Portal</h1>
+  
+  <div class="form-section">
+    <p>
+      Have you ever been bothered by something but your gandu boyfriend Abdullah is no where to be found, 
+      now with a click of a button you can send him an email on two different accounts automatically 
+      set as high priority and a discord ping just to be sure.
+    </p>
+    
+    <select id="moodSelect">
+      <option value="😡 Angry">😡 Angry</option>
+      <option value="😈 Mischievous">😈 Mischievous</option>
+      <option value="🙁 Sad">🙁 Sad</option>
+      <option value="🙂 Happy">🙂 Happy</option>
+      <option value="😋 Hungry">😋 Hungry</option>
+    </select>
+
+    <textarea id="grievanceText" placeholder="Write what's bothering you here..."></textarea>
+    <button onclick="addGrievance()">Submit</button>
+  </div>
+
+  <ul id="grievanceList"></ul>
+
+  <script>
+    // Protect page behind secret phrase login
+    if (sessionStorage.getItem("bunker_access") !== "true") {
+      window.location.href = "index.html";
+    }
+
+     document.getElementById("grievanceText").addEventListener("input", function() {
+      const text = this.value.toLowerCase();
+      if (text.includes("crazy")) {
+        document.getElementById("crazyAudio").play().catch(() => {
+          console.log("Autoplay blocked until user interacts.");
+        });
+      }
+    });
+
+    function spawnLoveMessage() {
+      const msg = document.createElement("div");
+      msg.className = "loveMessage";
+      msg.textContent = "I love you";
+
+      msg.style.top = Math.random() * 70 + 10 + "%";
+      msg.style.left = Math.random() * 70 + 10 + "%";
+
+      document.body.appendChild(msg);
+
+      setTimeout(() => msg.style.opacity = 1, 100);   // fade in
+      setTimeout(() => msg.style.opacity = 0, 4000);  // fade out
+      setTimeout(() => msg.remove(), 6000);           // cleanup
+    }
+
+    function randomLoveLoop() {
+      const interval = Math.floor(Math.random() * 60000) + 30000; // 30–90s
+      setTimeout(() => {
+        spawnLoveMessage();
+        randomLoveLoop();
+      }, interval);
+    }
+
+    randomLoveLoop(); // start loop
+
+    function addGrievance() {
+      const text = document.getElementById("grievanceText").value.trim();
+      const mood = document.getElementById("moodSelect").value;
+
+      if (!text) {
+        alert("Please write something first!");
+        return;
+      }
+
+      // Add to local list
+      const list = document.getElementById("grievanceList");
+      const li = document.createElement("li");
+      li.textContent = mood + " → " + text;
+      list.appendChild(li);
+
+      // Save to local storage
+      saveGrievances();
+
+      // Send to Discord
+      sendToDiscord(mood, text);
+
+      // Clear box
+      document.getElementById("grievanceText").value = "";
+    }
+
+    function saveGrievances() {
+      const items = [];
+      document.querySelectorAll("#grievanceList li").forEach(li => items.push(li.textContent));
+      localStorage.setItem("missing_bf_grievances", JSON.stringify(items));
+    }
+
+    function loadGrievances() {
+      const saved = JSON.parse(localStorage.getItem("missing_bf_grievances") || "[]");
+      const list = document.getElementById("grievanceList");
+      saved.forEach(text => {
+        const li = document.createElement("li");
+        li.textContent = text;
+        list.appendChild(li);
+      });
+    }
+
+    function sendToDiscord(mood, message) {
+      const webhookURL = "https://discord.com/api/webhooks/1420770076084273294/UX0FSEPcxuS8O41ZGdz0KLJ73Mk2IYHaXIE518d4-cIDPblR_lZ_zut4-0RW5fAgmuot";
+      const payload = {
+        embeds: [{
+          title: "Missing Boyfriend Alert",
+          description: `${mood} → ${message}`,
+          color: 0xa020f0, // purple
+          timestamp: new Date()
+        }]
+      };
+
+      fetch(webhookURL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      }).catch(err => console.error("Discord error:", err));
+    }
+
+    loadGrievances();
+
+	function applyAnniversaryTheme() {
+    const today = new Date();
+    if (today.getDate() === 6) {
+      document.body.style.backgroundColor = "#2b0f36"; // deep romantic purple
+      document.body.style.color = "#ff9de2"; // pink text
+      document.body.style.backgroundImage = "url('hearts-bg.png')"; // optional heart pattern
+      document.body.style.backgroundSize = "cover";
+      document.body.style.backgroundRepeat = "no-repeat";
+    }
+  }
+  applyAnniversaryTheme();
+  </script>
+</body>
+</html>
