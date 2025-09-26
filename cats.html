@@ -71,39 +71,43 @@
 
   <script>
     if (sessionStorage.getItem("bunker_access") !== "true") {
-      window.location.href = "index.html";
-    }
-
-    const gifContainer = document.getElementById("gifContainer");
-
-    async function loadCats(count = 6) {
-  for (let i = 0; i < count; i++) {
-    const res = await fetch("https://cataas.com/cat/gif?json=true");
-    const data = await res.json();
-    const gifUrl = "https://cataas.com" + data.url; // fix: build full URL
-
-    const box = document.createElement("div");
-    box.className = "gifBox";
-
-    const img = document.createElement("img");
-    img.src = gifUrl;
-    img.alt = "Cute Cat";
-    img.loading = "lazy"; // saves bandwidth
-
-    box.appendChild(img);
-    gifContainer.appendChild(box);
+    window.location.href = "index.html";
   }
-}
 
-    // Load first batch
-    loadCats();
+  const gifContainer = document.getElementById("gifContainer");
 
-    // Load more when scrolling near bottom
-    window.addEventListener("scroll", () => {
-      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 200) {
-        loadCats(4);
-      }
-    });
+  async function loadCats(count = 6) {
+    try {
+      const res = await fetch(`https://api.thecatapi.com/v1/images/search?limit=${count}&mime_types=gif`);
+      const data = await res.json();
+
+      data.forEach(cat => {
+        const box = document.createElement("div");
+        box.className = "gifBox";
+
+        const img = document.createElement("img");
+        img.src = cat.url;
+        img.alt = "Cute Cat";
+        img.loading = "lazy";
+
+        box.appendChild(img);
+        gifContainer.appendChild(box);
+      });
+    } catch (err) {
+      console.error("Error loading cats:", err);
+    }
+  }
+
+  // Load first batch
+  loadCats();
+
+  // Load more when scrolling near bottom
+  window.addEventListener("scroll", () => {
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 200) {
+      loadCats(4);
+    }
+  });
   </script>
 </body>
+
 </html>
