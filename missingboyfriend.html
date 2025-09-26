@@ -20,6 +20,17 @@
       position: relative;
     }
 
+	.loveMessage {
+  position: absolute;
+  font-size: 22px;
+  font-weight: bold;
+  color: #ff9de2; /* cute purple-pink */
+  opacity: 0;
+  transition: opacity 2s ease-in-out;
+  z-index: 9999; /* make sure it’s on top of everything */
+  pointer-events: none;
+}
+
     body::before {
  	 content: "";
  	 position: absolute;
@@ -283,3 +294,4 @@
 </body>
 
 </html>
+
