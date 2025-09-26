@@ -7,13 +7,12 @@
   <style>
     body {
       font-family: 'Courier New', monospace;
-	  cursor: url("cursor.png"), auto;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
       margin: 0;
-      background: linear-gradient(to bottom, #3e3e3e, #2b2b2b); /* dark room */
+      background: linear-gradient(to bottom, #3e3e3e, #2b2b2b); 
     }
 
     .table {
@@ -74,29 +73,29 @@
 	<div class="navbar">
  	 <a href="button.html">Panic Button</a>
   	<a href="missingboyfriend.html">Missing Boyfriend Portal</a>
+	<a href="cats.html">Unlimited Cat Gifs</a>
 	</div>
 
 	<style>
  	 .navbar {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      background: #1f1b2e;
-      padding: 8px 12px;
-      border-radius: 8px;
-    }
-
-    .navbar a {
-      margin-right: 12px;
-      text-decoration: none;
-      color: #d77bff;
-      font-size: 14px;
-    }
-
-    .navbar a:hover {
-      color: #ffffff;
-      text-decoration: underline;
-    }
+	  position: absolute;
+  	top: 10px;
+  	left: 10px;
+  	background: #1f1b2e;
+ 	 padding: 8px 12px;
+  	border-radius: 8px;
+  	z-index: 10;
+	}
+	.navbar a {
+ 	 margin-right: 12px;
+ 	 text-decoration: none;
+ 	 color: #d77bff;
+  	font-size: 14px;
+	}
+	.navbar a:hover {
+  	color: #ffffff;
+  	text-decoration: underline;
+	}
 	</style>
  	 <div class="table">
     	<div class="button-base">
@@ -135,9 +134,9 @@
 	function applyAnniversaryTheme() {
     const today = new Date();
     if (today.getDate() === 6) {
-      document.body.style.backgroundColor = "#2b0f36"; // deep romantic purple
+      document.body.style.backgroundColor = "#2b0f36"; 
       document.body.style.color = "#ff9de2"; // pink text
-      document.body.style.backgroundImage = "url('hearts-bg.png')"; // optional heart pattern
+      document.body.style.backgroundImage = "url('hearts-bg.png')"; 
       document.body.style.backgroundSize = "cover";
       document.body.style.backgroundRepeat = "no-repeat";
     }
@@ -146,5 +145,4 @@
 </script>
 
 </body>
-
 </html>
